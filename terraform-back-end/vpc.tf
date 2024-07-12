@@ -1,4 +1,4 @@
-# VPN Configuration
+# VPC Configuration
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
   instance_tenancy = "default"
@@ -50,6 +50,43 @@ resource "aws_security_group" "security_group" {
     # }
 
 }
+
+# Internet Gateway Configuration
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "ecs-vpc-back-igw"
+  }
+}
+
+# Route Table Configuration
+resource "aws_route_table" "route_table" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "ecs-route-table"
+  }
+}
+
+# Route Configuration for Internet Gateway
+resource "aws_route" "route" {
+  route_table_id = aws_route_table.route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.igw.id
+}
+
+resource "aws_route_table_association" "subnet1_association" {
+  subnet_id      = aws_subnet.subnet1.id
+  route_table_id = aws_route_table.route_table.id
+}
+
+resource "aws_route_table_association" "subnet2_association" {
+  subnet_id      = aws_subnet.subnet2.id
+  route_table_id = aws_route_table.route_table.id
+}
+//crear getway
+
+
+//vincular tabla de enrutamiento con getway
 
 # Info
 
