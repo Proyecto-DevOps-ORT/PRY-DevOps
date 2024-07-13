@@ -46,6 +46,35 @@ git rm -r --cached .terraform/
 git rm --cached *.tfstate
 `
 
+Instalo plugins de terraform
+
+`
+terraform init
+`
+
+para verificar sintaxis de codigo terraform
+`
+terrafrm validate
+`
+Para ver lo que se va a correr 
+`
+terraform plan
+`
+
+<sup>Nota: Si parece quedar colgada la terminal es por que no estan cargadas las credenciales correctamente en el achivo home/.aws/credentials</sup>
+
+
+para ejecutar codigo terraform
+
+`
+terraform apply
+`
+
+para eliminar todo lo que se creo con terraform
+
+`
+terraform destroy
+`
 
 
 
