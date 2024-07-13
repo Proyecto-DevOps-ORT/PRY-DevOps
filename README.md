@@ -157,16 +157,47 @@ El pipeline de CI-CD para el Back End sigue una estructura similar, con etapas e
 Ambos pipelines están diseñados para asegurar que cada cambio se integre y despliegue de manera segura y eficiente, minimizando los errores y asegurando una alta calidad en la entrega del producto.
 
 ### Microservicios
-<!-- Descripción de los microservicios aquí -->
+
+Implementamos cuatro microservicios, cada uno desarrollado y gestionado de forma independiente con su propio repositorio y su propia imagen de Docker. Al utilizar una arquitectura basada en microservicios, logramos encapsular las funcionalidades de cada servicio, permitiendo que operen de manera autónoma. Aunque los microservicios están interconectados, esta independencia significa que un fallo en uno de ellos no afectará críticamente la disponibilidad total del producto. Esta estrategia no solo mejora la resiliencia del sistema, sino que también facilita el mantenimiento y la escalabilidad, permitiendo actualizaciones y despliegues más ágiles y seguros.
 
 ### Análisis de Código Estático
-<!-- Descripción del análisis de código estático aquí -->
+
+Para el análisis de código, usamos SonarCloud, el cual ejecutamos como el primer paso de nuestro pipeline de CI-CD. Este análisis inicial nos permite verificar que el código cumpla con los estándares de calidad definidos y pase el quality gate que hemos configurado. Utilizamos el quality gate predeterminado de la plataforma. Es crucial destacar que si el análisis de calidad del código no es satisfactorio, todo el pipeline de CI-CD fallará. 
+
+A continuación, presentamos el último reporte de análisis de código estático de los repositorios de Front End y Back End.
+
 
 ### Infraestructura
-<!-- Descripción de la infraestructura aquí -->
+
+Nuestra infraestructura está centralizada en AWS, utilizando varios de sus servicios en la nube para asegurar la eficiencia y escalabilidad de nuestro proyecto.
+
+#### Front End
+
+Para el Front End, hemos implementado los siguientes recursos:
+
+- **S3**: Tres buckets de S3, uno para cada ambiente (Producción, Staging, Desarrollo).
+- **Serverless**: Funciones Lambda que escuchan los cambios en cada uno de los buckets de S3 para notificar al usuario una vez que se realiza un deploy.
+
+#### Back End
+
+Para el Back End, utilizamos:
+
+- **ECS**: Amazon Elastic Container Service para la orquestación de contenedores Docker.
+- **ALB**: (Pendiente especificar el servicio exacto utilizado)
+- **Otro**: (Pendiente especificar el servicio exacto utilizado)
+
+#### Automatización con Terraform
+
+Utilizamos Terraform para automatizar la creación de todos los recursos de infraestructura mencionados anteriormente. Esta herramienta nos brinda una gran ayuda y facilidad para replicar la infraestructura, ya sea para este proyecto o para proyectos similares en el futuro. Terraform nos permite desplegar toda la infraestructura simplemente ejecutando el código, levantando en menos de un minuto todas las configuraciones y recursos necesarios en AWS, entre otros beneficios.
 
 ### Test
-<!-- Descripción de los test aquí -->
+
+En la sección de test, utilizamos principalmente las herramientas de testeo que ofrece Postman para validar la funcionalidad y disponibilidad de las APIs de nuestros microservicios. Postman nos permite crear y ejecutar pruebas automáticas, asegurando que nuestros endpoints respondan correctamente y cumplan con las expectativas definidas.
+
+Además, con Postman podemos agregar nuevos escenarios de prueba en el futuro, cubriendo así una mayor variedad de casos y asegurando la robustez de nuestras APIs a medida que el proyecto evoluciona. 
+
+También estamos considerando la incorporación de otras herramientas y metodologías de prueba en diferentes instancias de la aplicación para garantizar una cobertura completa y exhaustiva.
+
 
 ## Conclusiones
 <!-- Descripción de las conclusiones aquí -->
