@@ -1,8 +1,8 @@
 ######################################################################################################################################
 ###############     PRODUCCION   ########################################################################################################
 
-resource "aws_ecs_service" "service-shipping-prod" {
-  name = "service-shipping-produccion"
+resource "aws_ecs_service" "service-payments-prod" {
+  name = "service-payments-produccion"
   cluster = aws_ecs_cluster.ecs-cluster.arn
   launch_type = "FARGATE"
   enable_execute_command = true
@@ -10,7 +10,7 @@ resource "aws_ecs_service" "service-shipping-prod" {
   deployment_maximum_percent = 200
   deployment_minimum_healthy_percent = 100
   desired_count = 1
-  task_definition = aws_ecs_task_definition.td-shipping-produccion.arn
+  task_definition = aws_ecs_task_definition.td-payments-produccion.arn
 
   network_configuration {
     security_groups = [aws_security_group.security_group.id]
@@ -19,11 +19,11 @@ resource "aws_ecs_service" "service-shipping-prod" {
   }
 }
 
-resource "aws_ecs_task_definition" "td-shipping-produccion" {
+resource "aws_ecs_task_definition" "td-payments-produccion" {
   container_definitions = jsonencode([
     {
-      name = "container-pry-backend-shipping"
-      image = "${aws_ecr_repository.repo-shipping.repository_url}:latest" # aca va la uri de la imagen de ecr #"317097728802.dkr.ecr.us-east-1.amazonaws.com/repo-pry-backend-shipping" 
+      name = "container-pry-backend-payments"
+      image = "${aws_ecr_repository.repo-payments.repository_url}:latest" # aca va la uri de la imagen de ecr #"317097728802.dkr.ecr.us-east-1.amazonaws.com/repo-pry-backend-payments" 
       cpu = 256
       memory = 512
       essential = true
@@ -35,7 +35,7 @@ resource "aws_ecs_task_definition" "td-shipping-produccion" {
       ]
     }
   ])
-  family = "task-def-shipping-produccion"
+  family = "task-def-payments-produccion"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
   execution_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
@@ -47,8 +47,8 @@ resource "aws_ecs_task_definition" "td-shipping-produccion" {
 ######################################################################################################################################
 ###############     STAGING   ########################################################################################################
 
-resource "aws_ecs_service" "service-shipping-stage" {
-  name = "service-shipping-stage"
+resource "aws_ecs_service" "service-payments-stage" {
+  name = "service-payments-stage"
   cluster = aws_ecs_cluster.ecs-cluster.arn
   launch_type = "FARGATE"
   enable_execute_command = true
@@ -56,7 +56,7 @@ resource "aws_ecs_service" "service-shipping-stage" {
   deployment_maximum_percent = 200
   deployment_minimum_healthy_percent = 100
   desired_count = 1
-  task_definition = aws_ecs_task_definition.td-shipping-stage.arn
+  task_definition = aws_ecs_task_definition.td-payments-stage.arn
 
   network_configuration {
     security_groups = [aws_security_group.security_group.id]
@@ -65,11 +65,11 @@ resource "aws_ecs_service" "service-shipping-stage" {
   }
 }
 
-resource "aws_ecs_task_definition" "td-shipping-stage" {
+resource "aws_ecs_task_definition" "td-payments-stage" {
   container_definitions = jsonencode([
     {
-      name = "container-pry-backend-shipping"
-      image = "${aws_ecr_repository.repo-shipping.repository_url}:staging" # aca va la uri de la imagen de ecr #"317097728802.dkr.ecr.us-east-1.amazonaws.com/repo-pry-backend-shipping" 
+      name = "container-pry-backend-payments"
+      image = "${aws_ecr_repository.repo-payments.repository_url}:staging" # aca va la uri de la imagen de ecr #"317097728802.dkr.ecr.us-east-1.amazonaws.com/repo-pry-backend-payments" 
       cpu = 256
       memory = 512
       essential = true
@@ -81,7 +81,7 @@ resource "aws_ecs_task_definition" "td-shipping-stage" {
       ]
     }
   ])
-  family = "task-def-shipping-stage"
+  family = "task-def-payments-stage"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
   execution_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
@@ -92,8 +92,8 @@ resource "aws_ecs_task_definition" "td-shipping-stage" {
 
 ######################################################################################################################################
 ###############     DEVELOP   ########################################################################################################
-resource "aws_ecs_service" "service-shipping-dev" {
-  name = "service-shipping-dev"
+resource "aws_ecs_service" "service-payments-dev" {
+  name = "service-payments-dev"
   cluster = aws_ecs_cluster.ecs-cluster.arn
   launch_type = "FARGATE"
   enable_execute_command = true
@@ -101,7 +101,7 @@ resource "aws_ecs_service" "service-shipping-dev" {
   deployment_maximum_percent = 200
   deployment_minimum_healthy_percent = 100
   desired_count = 1
-  task_definition = aws_ecs_task_definition.td-shipping-dev.arn
+  task_definition = aws_ecs_task_definition.td-payments-dev.arn
 
   network_configuration {
     security_groups = [aws_security_group.security_group.id]
@@ -110,11 +110,11 @@ resource "aws_ecs_service" "service-shipping-dev" {
   }
 }
 
-resource "aws_ecs_task_definition" "td-shipping-dev" {
+resource "aws_ecs_task_definition" "td-payments-dev" {
   container_definitions = jsonencode([
     {
-      name = "container-pry-backend-shipping"
-      image = "${aws_ecr_repository.repo-shipping.repository_url}:develop" # aca va la uri de la imagen de ecr #"317097728802.dkr.ecr.us-east-1.amazonaws.com/repo-pry-backend-shipping" 
+      name = "container-pry-backend-payments"
+      image = "${aws_ecr_repository.repo-payments.repository_url}:develop" # aca va la uri de la imagen de ecr #"317097728802.dkr.ecr.us-east-1.amazonaws.com/repo-pry-backend-payments" 
       cpu = 256
       memory = 512
       essential = true
@@ -126,7 +126,7 @@ resource "aws_ecs_task_definition" "td-shipping-dev" {
       ]
     }
   ])
-  family = "task-def-shipping-dev"
+  family = "task-def-payments-dev"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
   execution_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
