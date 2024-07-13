@@ -25,7 +25,7 @@ resource "aws_ecs_task_definition" "td" {
   container_definitions = jsonencode([
     {
       name = "container-pry-backend-shipping"
-      image = "${aws_ecr_repository.repo-shipping.repository_url}:latest" # aca va la uri de la imagen de ecr
+      image =  "317097728802.dkr.ecr.us-east-1.amazonaws.com/repo-pry-backend-shipping" #"${aws_ecr_repository.repo-shipping.repository_url}:latest" # aca va la uri de la imagen de ecr
       cpu = 256
       memory = 512
       essential = true
