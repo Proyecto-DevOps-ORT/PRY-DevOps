@@ -33,6 +33,13 @@ resource "aws_ecs_task_definition" "td-orders-produccion" {
           hostPort = 8080
         }
       ]
+      environment = [
+        {
+          name = "APP_ARGS"
+          value = "http://172.17.0.2:8080 http://172.17.0.4:8080 http://172.17.0.3:8080"
+        }
+        // aca podria agregar mas variables de entorno
+      ]
     }
   ])
   family = "task-def-orders-produccion"
@@ -79,6 +86,13 @@ resource "aws_ecs_task_definition" "td-orders-stage" {
           hostPort = 8080
         }
       ]
+      environment = [
+        {
+          name = "APP_ARGS"
+          value = "http://172.17.0.2:8080 http://172.17.0.4:8080 http://172.17.0.3:8080"
+        }
+        // aca podria agregar mas variables de entorno
+      ]
     }
   ])
   family = "task-def-orders-stage"
@@ -123,6 +137,13 @@ resource "aws_ecs_task_definition" "td-orders-dev" {
           containerPort = 8080
           hostPort = 8080
         }
+      ]
+      environment = [
+        {
+          name = "APP_ARGS"
+          value = "http://172.17.0.2:8080 http://172.17.0.4:8080 http://172.17.0.3:8080"
+        }
+        // aca podria agregar mas variables de entorno
       ]
     }
   ])
