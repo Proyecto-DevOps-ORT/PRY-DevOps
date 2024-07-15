@@ -97,12 +97,44 @@ resource "aws_route_table_association" "subnet2_association" {
   subnet_id      = aws_subnet.subnet2.id
   route_table_id = aws_route_table.route_table.id
 }
-//crear getway
+
+################# BALANCEADOR DE CARGA ############################
+
+# # creo target group
+
+# resource "aws_lb_target_group" "target_group_ort" {
+#   name     = "target-group_devops"
+#   port     = 8080
+#   protocol = "HTTP"
+#   vpc_id   = aws_vpc.vpc.id
+#   tags = {
+#     Name = "tg-for-all-microservices"
+#   }
+#   # agrego healenhy_check 
+#   health_check {
+#     path                = "/health"
+#     protocol            = "HTTP"
+#     port                = "8080"
+#     interval            = 30
+#     timeout             = 5
+#     healthy_threshold   = 2
+#     unhealthy_threshold = 2
+#   }
+# }
+
+# # crear balanceador de carga
 
 
-//vincular tabla de enrutamiento con getway
 
-# Info
+# # creo 
+
+
+
+
+
+
+
+################ Info  #################################################3
 
 # cidr_block = "10.0.0.0/16"
 

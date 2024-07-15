@@ -17,6 +17,12 @@ resource "aws_ecs_service" "service-shipping-prod" {
     subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
     assign_public_ip = true
   }
+
+  #  load_balancer {
+	# target_group_arn = aws_lb_target_group.ecs_tg_prod.arn
+	# container_name   = "container-pry-backend-shipping"
+	# container_port   = 8080
+  # }
 }
 
 resource "aws_ecs_task_definition" "td-shipping-produccion" {
@@ -63,6 +69,11 @@ resource "aws_ecs_service" "service-shipping-stage" {
     subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
     assign_public_ip = true
   }
+  # load_balancer {
+	# target_group_arn = aws_lb_target_group.ecs_tg_stage.arn
+	# container_name   = "container-pry-backend-shipping"
+	# container_port   = 8080
+  # }
 }
 
 resource "aws_ecs_task_definition" "td-shipping-stage" {
@@ -108,6 +119,12 @@ resource "aws_ecs_service" "service-shipping-dev" {
     subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
     assign_public_ip = true
   }
+
+  # load_balancer {
+	# target_group_arn = aws_lb_target_group.ecs_tg_dev.arn
+	# container_name   = "container-pry-backend-shipping"
+	# container_port   = 8080
+  # }
 }
 
 resource "aws_ecs_task_definition" "td-shipping-dev" {
