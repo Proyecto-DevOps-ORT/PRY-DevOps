@@ -38,8 +38,8 @@ resource "aws_ecs_task_definition" "td-payments-produccion" {
   family = "task-def-payments-produccion"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
-  task_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
+  execution_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
+  task_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
   memory = "512"
   cpu = "256"
 }
@@ -84,8 +84,8 @@ resource "aws_ecs_task_definition" "td-payments-stage" {
   family = "task-def-payments-stage"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
-  task_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
+  execution_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
+  task_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
   memory = "512"
   cpu = "256"
 }
@@ -129,8 +129,8 @@ resource "aws_ecs_task_definition" "td-payments-dev" {
   family = "task-def-payments-dev"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
-  task_role_arn = "arn:aws:iam::317097728802:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
+  execution_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
+  task_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
   memory = "512"
   cpu = "256"
 }

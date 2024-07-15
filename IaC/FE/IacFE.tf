@@ -8,12 +8,6 @@ terraform {
   }
 }
 
-# Provider Block
-provider "aws" {
-  profile = "default"
-  region  = "us-east-1"
-}
-
 # S3 Creation with Static Website Hosting and Policies
 resource "aws_s3_bucket" "dev_bucket" {
   bucket = "dev-pry-devops"
@@ -151,7 +145,7 @@ resource "aws_lambda_function" "email_alert_lambda" {
   function_name = "Email-Alert"
   filename      = "${path.module}/lambda_function.zip"  # Path to your .zip file
   handler       = "index.handler"  # Assuming your Lambda function's entry point is in index.js with exports.handler
-  runtime       = "nodejs20.x"
+  runtime       = "nodejs18.x"
   role          = "arn:aws:iam::753480294298:role/LabRole"  # Replace your_account_id with your AWS account ID
 
   # Environment variables can be defined here if necessary
