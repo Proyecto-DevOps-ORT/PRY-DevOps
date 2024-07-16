@@ -69,9 +69,7 @@ En resumen, nuestros objetivos generales son:
 - **Postman**: comunicación con API.
 - **Terraform**: infraestructura como código.
 - **Node.js y Nodemailer**: envío de emails.
-- **Newman** ejecutar y generar reporte postman collection
-- **ECR** guuardar imagenes de contenedores
-- **ECS** manejo de contenedores
+- **Newman** ejecutar y generar reporte postman collection.
 
 ### Ambientes
 
@@ -156,7 +154,7 @@ El pipeline de CI-CD para el Back End sigue una estructura similar, con etapas e
 5. **Despliegue en ECS**: Se despliega el microservicio en AWS ECS.
 
 <div align="center">
-  <img src="Static/CICD-BEND.png" alt="CI-CD Front End" width="700"/>
+  <img src="Static/CICD-BEND.png" alt="CI-CD Front End" width="800"/>
 </div>
 
 
@@ -187,9 +185,14 @@ Para problemas existentes:
 Para mejorar calidad de codigo:
  - Cognitive Complexity of methods should not be too high java:S3776
 
+<div align="center">
+  <img src="Static/SonarFE.png" alt="CI-CD Front End" width="800"/>
+</div>
+
+
 #### Back end - Quality Gates
 
-ara una mejor calida de codigo y evitar errores que hay actualmente se podrian agregar cuality gates
+Para una mejor calida de codigo y evitar errores que hay actualmente se podrian agregar Quality Gate 
 
 Para problemas existentes:
 - Field dependency injection should be avoided java:S6813 
@@ -203,6 +206,26 @@ Para problemas existentes:
 - Cognitive Complexity of methods should not be too high java:S3776 
 - Null pointers should not be dereferenced java:S2259 
 - Logging should not be vulnerable to injection attacks javasecurity:S5145
+
+**Payments Report**
+<div align="center">
+  <img src="Static/SonarBEPayment.png" alt="CI-CD Front End" width="800"/>
+</div>
+
+**Orders Report**
+<div align="center">
+  <img src="Static/SonarBEOrders.png" alt="CI-CD Front End" width="800"/>
+</div>
+
+**Products Report**
+<div align="center">
+  <img src="Static/SonarBEProducts.png" alt="CI-CD Front End" width="800"/>
+</div>
+
+**Shipping Report**
+<div align="center">
+  <img src="Static/SonarBEShipping.png" alt="CI-CD Front End" width="800"/>
+</div>
 
 ### Infraestructura
 
