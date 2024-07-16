@@ -240,6 +240,9 @@ Además, con Postman podemos agregar nuevos escenarios de prueba en el futuro, c
 
 También estamos considerando la incorporación de otras herramientas y metodologías de prueba en diferentes instancias de la aplicación para garantizar una cobertura completa y exhaustiva.
 
+<div align="center">
+  <img src="Static/Newman - test.png" alt="CI-CD Front End" width="700"/>
+</div>
 
 
 ## Conclusiones
