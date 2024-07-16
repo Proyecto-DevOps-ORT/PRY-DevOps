@@ -1,0 +1,36 @@
+name: Github Action Workflow DEV
+
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types:
+      - CICD-prod
+  workflow_dispatch:
+
+concurrency:
+  group: environment-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  CICD-prod:
+    uses: Proyecto-DevOps-ORT/PRY-BackEnd-Orders/.github/workflows/ci-cd.yaml@main
+    with:
+      CI_ENV: production
+      CONTENTFUL_ENVIRONMENT: 'main'
+      ORGANIZATION: 'Proyecto-DevOps-ORT'
+      REPOSITORY: 'PRY-BackEnd-Orders'
+      ECR_REPOSITORY: 'pry-backend-orders'
+      POSTMAN_REPOSITORY_NAME: 'orders-service'
+      IMAGE_TAG: 'latest'
+      CLUSTER_NAME: 'ecs-cluster-backend'
+      SERVICE_NAME: 'service-orders-produccion'
+      TASK_DEFINITION_NAME: 'task-def-orders-produccion'
+      CONTAINER_ARGS: '--env "APP_ARGS=http://172.17.0.2:8080 http://172.17.0.4:8080 http://172.17.0.3:8080"'
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "884cbe62-9f63-4fef-bd8e-f904c44fe794",
+		"name": "Orders-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14461539",
+		"_collection_link": "https://yomanejo.postman.co/workspace/DevOps-2024~9499d293-f277-466b-b8b5-493333b6b6e3/collection/14461539-884cbe62-9f63-4fef-bd8e-f904c44fe794?action=share&source=collection_link&creator=14461539"
+	},
+	"item": [
+		{
+			"name": "RealizarCompra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    \"123\", \"321\", \"111\"\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
