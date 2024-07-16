@@ -69,6 +69,9 @@ En resumen, nuestros objetivos generales son:
 - **Postman**: comunicación con API.
 - **Terraform**: infraestructura como código.
 - **Node.js y Nodemailer**: envío de emails.
+- **Newman** ejecutar y generar reporte postman collection
+- **ECR** guuardar imagenes de contenedores
+- **ECS** manejo de contenedores
 
 ### Ambientes
 
@@ -148,11 +151,16 @@ El pipeline de CI-CD para el Front End sigue estos pasos:
 El pipeline de CI-CD para el Back End sigue una estructura similar, con etapas específicas para cada microservicio. Cada microservicio tiene su propio repositorio y pipeline, asegurando una integración y despliegue independientes y controlados.
 
 1. **Análisis de Código Estático**: Se realiza un análisis de código estático utilizando SonarCloud.
-2. **Instalación de Dependencias**: Se instalan las dependencias necesarias para el proyecto.
-3. **Build y Pruebas**: Se construyen los artefactos del proyecto y se ejecutan pruebas automatizadas.
-4. **Configuración de Credenciales**: Se configuran las credenciales de acceso a AWS.
-5. **Despliegue a AWS**: Se despliega el microservicio a la infraestructura de AWS correspondiente.
-6. **Notificación de Despliegue**: Se implementan notificaciones para informar a los equipos sobre el estado del despliegue.
+2. **Prueba de endpoints**: Se levanta un contenedor en los servidores de github y se verifica la correcta respuesta de sus endpoints con postman y newman.
+3. **Despliegue de imagen a ECR**: Se contruye la imagen y se sube a AWS ECR.
+5. **Despliegue en ECS**: Se despliega el microservicio en AWS ECS.
+
+<div align="center">
+  <img src="Static/CICD-BEND.png" alt="CI-CD Front End" width="700"/>
+</div>
+
+
+#### Resumen CICD
 
 Ambos pipelines están diseñados para asegurar que cada cambio se integre y despliegue de manera segura y eficiente, minimizando los errores y asegurando una alta calidad en la entrega del producto.
 
@@ -166,6 +174,35 @@ Para el análisis de código, usamos SonarCloud, el cual ejecutamos como el prim
 
 A continuación, presentamos el último reporte de análisis de código estático de los repositorios de Front End y Back End.
 
+#### Front end - Quality Gates
+
+Para una mejor calida de codigo y evitar errores que hay actualmente se podrian agregar Quality Gate 
+
+Para problemas existentes:
+ - Unnecessary imports should be removed typescript:S1128
+ - React props should be read-only typescript:S6759
+ - Prefer tag over ARIA role typescript:S6819
+ - Spacing between inline elements should be explicit    typescript:S6772
+
+Para mejorar calidad de codigo:
+ - Cognitive Complexity of methods should not be too high java:S3776
+
+#### Back end - Quality Gates
+
+ara una mejor calida de codigo y evitar errores que hay actualmente se podrian agregar cuality gates
+
+Para problemas existentes:
+- Field dependency injection should be avoided java:S6813 
+- Raw types should not be used java:S3740 
+- String literals should not be duplicated java:S1192 
+- "Preconditions" and logging arguments should not require evaluation java:S2629 
+- Format strings should be used correctly java:S3457 
+- Methods should not be empty java:S1186 
+- "Random" objects should be reused java:S2119 
+- Static non-final field names should comply with a naming convention java:S3008 
+- Cognitive Complexity of methods should not be too high java:S3776 
+- Null pointers should not be dereferenced java:S2259 
+- Logging should not be vulnerable to injection attacks javasecurity:S5145
 
 ### Infraestructura
 
@@ -182,9 +219,8 @@ Para el Front End, hemos implementado los siguientes recursos:
 
 Para el Back End, utilizamos:
 
+- **ECR**: Amazon Elastic Container Registry para almacenamiento de imagentes Docker.
 - **ECS**: Amazon Elastic Container Service para la orquestación de contenedores Docker.
-- **ALB**: (Pendiente especificar el servicio exacto utilizado)
-- **Otro**: (Pendiente especificar el servicio exacto utilizado)
 
 #### Automatización con Terraform
 
@@ -192,11 +228,19 @@ Utilizamos Terraform para automatizar la creación de todos los recursos de infr
 
 ### Test
 
-En la sección de test, utilizamos principalmente las herramientas de testeo que ofrece Postman para validar la funcionalidad y disponibilidad de las APIs de nuestros microservicios. Postman nos permite crear y ejecutar pruebas automáticas, asegurando que nuestros endpoints respondan correctamente y cumplan con las expectativas definidas.
+- **Postman**: Se utilizo para crear collections de los microservicios.
+- **Newman**: Se utilizo para ejectuar las collections generadas con postman y generar un reporte en cada ejecucuion el cual verifica el estado de los endpoits del microservicio.
+
+Antes de desplegar una imagen Docker, es crucial asegurarse de que los endpoints de la API funcionen según lo esperado. Postman permite escribir pruebas detalladas que pueden ser ejecutadas automáticamente con Newman. En este caso, se optó por verificar la correcta respuesta de los endpoints. Las posibilidades de pruebas son muy amplias, y lo que se hizo fue algo mínimo para probar el funcionamiento de las herramientas.
+
+Se opto por usar Newman por que puede ser fácilmente integrado con GitHub Actions para ejecutar pruebas automáticamente cada vez que se construye una nueva imagen Docker. Esto asegura que solo las versiones que pasan todas las pruebas sean desplegadas.
+Esto no solo mejora la confianza en el despliegue, sino que también optimiza el proceso de desarrollo y entrega de software, asegurando una entrega continua y confiable de aplicaciones.
 
 Además, con Postman podemos agregar nuevos escenarios de prueba en el futuro, cubriendo así una mayor variedad de casos y asegurando la robustez de nuestras APIs a medida que el proyecto evoluciona. 
 
 También estamos considerando la incorporación de otras herramientas y metodologías de prueba en diferentes instancias de la aplicación para garantizar una cobertura completa y exhaustiva.
+
+
 
 ## Conclusiones
 
