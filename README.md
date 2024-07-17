@@ -15,6 +15,7 @@
 - [Objetivos](#objetivos)
 - [Propuesta](#propuesta)
 - [Conclusiones](#conclusiones)
+- [Puntos de Mejora y Errores](#puntos-de-mejora-y-errores)
 
 ## Problema
 En el corazón de la transformación digital de la empresa líder en retail, emergió un desafío inesperado, uno que pondría a prueba la resiliencia y adaptabilidad de su recién adoptada metodología de trabajo. La rápida transición hacia prácticas innovadoras y la adopción de nuevas tecnologías revelaron una brecha significativa en la comprensión y la comunicación entre los equipos de desarrollo y operaciones.
@@ -293,3 +294,15 @@ Para continuar mejorando y aprovechar al máximo los beneficios de DevOps, recom
 
 En conclusión, la transición hacia una metodología DevOps no solo ha resuelto problemas operativos y de comunicación, sino que también ha sentado las bases para un futuro más ágil, eficiente y colaborativo. Este enfoque nos permitirá adaptarnos mejor a las necesidades del mercado y seguir ofreciendo productos de alta calidad a nuestros clientes.
 
+
+## Puntos de Mejora y Errores
+
+- El IaC del Front End se presenta en un solo archivo donde se configura toda la infraestructura. Con más tiempo, lo recomendable sería desplegar la infraestructura en varios archivos, dependiendo de la herramienta que se despliega. Esto haría que sea más accesible en caso de actualizaciones o de agregar más/diferente infraestructura.
+
+- Cuando creamos el IaC del Back End, tuvimos un malentendido con el profesor, ya que entendimos de forma incorrecta que debíamos crear un solo clúster para todos los ambientes y microservicios. Esto, a la larga, nos trajo muchos problemas a la hora de discriminar los destinos de los balanceadores de carga. Al principio, intentamos agregar condiciones de destino a través de la configuración de path pattern en la URL. Esto nos tomó mucho tiempo y no llegamos a buen puerto con esta estrategia. En la última tutoría, el tutor pudo darse cuenta del error que cometimos al principio y del malentendido. Ya sin tiempo para modificar toda la lógica a nivel de IaC y CI/CD, decidimos presentar el IaC correspondiente a un solo ambiente, pero entendiendo que por cada ambiente debimos crear un clúster y, en cada clúster, los microservicios de ese ambiente. Con esa solución, tendríamos los balanceadores de carga en condiciones de discriminar (con la URL) cuál dirección corresponde a qué ambiente y, con el path, a qué microservicio.
+
+- Los archivos de Terraform podrían haberse hecho de forma más genérica para fomentar la reutilización de los mismos.
+
+- Se utilizaron los Quality Gates por defecto en SonarCloud, pudiéndose configurar en base a los requerimientos/políticas.
+
+- Se pueden agregar Newman para chequeos de escenarios particulares.
