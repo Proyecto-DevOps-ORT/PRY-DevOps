@@ -18,11 +18,11 @@ resource "aws_ecs_service" "service-shipping-prod" {
     assign_public_ip = true
   }
 
-  #  load_balancer {
-	# target_group_arn = aws_lb_target_group.ecs_tg_prod.arn
-	# container_name   = "container-pry-backend-shipping"
-	# container_port   = 8080
-  # }
+   load_balancer {
+	target_group_arn = aws_lb_target_group.ecs_tg_prod.arn
+	container_name   = "container-pry-backend-shipping"
+	container_port   = 8080
+  }
 }
 
 resource "aws_ecs_task_definition" "td-shipping-produccion" {
@@ -44,8 +44,8 @@ resource "aws_ecs_task_definition" "td-shipping-produccion" {
   family = "task-def-shipping-produccion"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
-  task_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
+  execution_role_arn = var.rol-lab #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
+  task_role_arn = var.rol-lab #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
   memory = "512"
   cpu = "256"
 }
@@ -69,11 +69,11 @@ resource "aws_ecs_service" "service-shipping-stage" {
     subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
     assign_public_ip = true
   }
-  # load_balancer {
-	# target_group_arn = aws_lb_target_group.ecs_tg_stage.arn
-	# container_name   = "container-pry-backend-shipping"
-	# container_port   = 8080
-  # }
+  load_balancer {
+	target_group_arn = aws_lb_target_group.ecs_tg_stage.arn
+	container_name   = "container-pry-backend-shipping"
+	container_port   = 8080
+  }
 }
 
 resource "aws_ecs_task_definition" "td-shipping-stage" {
@@ -95,8 +95,8 @@ resource "aws_ecs_task_definition" "td-shipping-stage" {
   family = "task-def-shipping-stage"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
-  task_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
+  execution_role_arn = var.rol-lab #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
+  task_role_arn = var.rol-lab #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
   memory = "512"
   cpu = "256"
 }
@@ -120,11 +120,11 @@ resource "aws_ecs_service" "service-shipping-dev" {
     assign_public_ip = true
   }
 
-  # load_balancer {
-	# target_group_arn = aws_lb_target_group.ecs_tg_dev.arn
-	# container_name   = "container-pry-backend-shipping"
-	# container_port   = 8080
-  # }
+  load_balancer {
+	target_group_arn = aws_lb_target_group.ecs_tg_dev.arn
+	container_name   = "container-pry-backend-shipping"
+	container_port   = 8080
+  }
 }
 
 resource "aws_ecs_task_definition" "td-shipping-dev" {
@@ -146,8 +146,8 @@ resource "aws_ecs_task_definition" "td-shipping-dev" {
   family = "task-def-shipping-dev"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
-  task_role_arn = "arn:aws:iam::753480294298:role/LabRole" #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
+  execution_role_arn = var.rol-lab #aws_iam_role.ecsTaskExecutionRole.arn --Lo saque de IAM => roles
+  task_role_arn = var.rol-lab #aws_iam_role.ecsTaskRole.arn --Lo saque de IAM => roles
   memory = "512"
   cpu = "256"
 }
